@@ -1,0 +1,805 @@
+@charset "utf-8";
+
+
+/*****************************************************************************************************************************************
+	form 요소 공통정의
+*****************************************************************************************************************************************/
+input[type=text],
+input[type=number],
+input[type=email],
+input[type=tel],
+input[type=date],
+input[type=password],
+textarea,
+select {width:100%;height:50px;border:1px solid #e5e5e5;border-radius:0;box-sizing:border-box;padding:0 12px;font-size:1.5rem;color:#333;resize:none;}
+select{padding-right:2px;-webkit-appearance:none;-moz-appearance:none;appearance:none;background:#fff url('../images/arrowSel.png') no-repeat right 10px center !important;}
+input[type=text]:disabled,
+input[type=number]:disabled,
+input[type=email]:disabled,
+input[type=tel]:disabled,
+input[type=date]:disabled,
+input[type=password]:disabled,
+input[type=text]:read-only,
+input[type=number]:read-only,
+input[type=email]:read-only,
+input[type=tel]:read-only,
+input[type=date]:read-only,
+input[type=password]:read-only {background:#fafafa; color:#888;}
+textarea {height:200px;padding:18px 12px 18px 12px;}
+
+input[type=text].error,
+input[type=number].error,
+input[type=email].error,
+input[type=tel].error,
+input[type=date].error,
+input[type=password].error,
+select.error,
+textarea.error {border:1px solid #e93333;background:#fff;}
+
+/* placeholder color 적용 */
+input::placeholder {color: #bbb;}
+input::-webkit-input-placeholder {color: #bbb;}
+input:-moz-placeholder {color: #bbb;}
+input::-moz-placeholder {color: #bbb;}
+input:-ms-input-placeholder {color: #bbb;}
+input::-ms-input-placeholder {color: #bbb;}
+
+
+.inputBox {position:relative;}
+.inputBox .placeholder {position: absolute;top: 0;left: 18px;color: #b2b2b2;line-height: 50px;}
+
+.passwordArea,.idArea {position:relative;width:100%;}
+.passwordArea .passWorldBtn {display:none;cursor:pointer;border:0;overflow:hidden;position:absolute;right:10px;top:17px;width:23px;height:18px;text-indent:-99999px;background:url('../images/btn_password_off.png') no-repeat center;}
+.passwordArea .passWorldBtn.on {background:url('../images/btn_password_on.png') no-repeat center}
+.idArea .deleteId {display:none;cursor:pointer;overflow:hidden;position:absolute;right:10px;top:17px;width:23px;height:18px;text-indent:-99999px;background:url('../images/btn_id_del.png') no-repeat center;border:0}
+
+/* checkbox */
+label{display:inline-block;position:relative;}
+label input[type="checkbox"],
+label input[type="radio"]{position:absolute;top:0;left:0;width:23px;height:23px;margin:0;padding:0;}
+label input[type="checkbox"] + span,
+label input[type="radio"] + span{display:block;position:relative;padding-left:30px;cursor:pointer;}
+label input[type="checkbox"] + span:before,
+label input[type="radio"] + span:before{content:'';display:block;position:absolute;left:0;top:0px;width:23px;height:23px;background:#fff;box-sizing:border-box;}
+label input[type="checkbox"] + span:after,
+label input[type="radio"] + span:after{content:'';display:block;position:absolute;left:0;top:0px;width:23px;height:23px;background-image:url('../images/ico_form.png');background-repeat:no-repeat;box-sizing:border-box;background-position:0 0;background-size: 115px 52px;}
+label input[type="radio"] + span:after {background-position:0 -30px}
+
+label input[type="checkbox"]:checked + span:after{background-position:-30px 0 }
+label input[type="radio"]:checked + span:after{background-position:-30px -30px}
+
+label.error input[type="checkbox"] + span:after{background-position:-60px 0 }
+label.error input[type="radio"] + span:after{background-position:-60px -30px}
+
+label input[type="checkbox"]:disabled + span:after{background-position:-92px 0 }
+label input[type="radio"]:disabled + span:after{background-position:-92px -30px}
+
+.formChkBox {min-height:23px;}
+.formChkBox {position: relative;font-size: 16px;text-align: left;color: #4c4c4c;display: block;}
+.formChkBox input {position: absolute;top: 0;left: 0;width: 23px;height: 23px;margin: 0;padding: 0;}
+.formChkBox label {display: block;position: relative;padding-left: 32px;font-size: 14px;color: #333;cursor: pointer;line-height: 23px;}
+.formChkBox label:before {content: "";display: block;position: absolute;left: 0;top: 0px;width: 23px;height: 23px;background: #fff;}
+.formChkBox input + label:after {content: "";display: block;position: absolute;left: 0;top: 0px;width: 23px;height: 23px;background-image:url('../images/ico_form.png');background-repeat:no-repeat;box-sizing:border-box;background-position:0 0;background-size: 115px 52px;}
+.formChkBox input[type="checkbox"] + label:after {background-position:0 0;}
+.formChkBox input[type="checkbox"]:checked + label:after {background-position:-30px 0}
+.formChkBox input[type="radio"] + label:after {background-position:0 -30px}
+.formChkBox input[type="radio"]:checked + label:after {background-position:-30px -30px}
+
+.inputText {-webkit-appearance:none;} /* 입력 폼 */
+.selectText {} /* 선택박스 폼 */
+.textArea {-webkit-appearance:none;} /* 텍스트 영역 */
+.inputFile {} /* 첨부파일 폼 */
+
+/* 폼요소 영역 */
+.fieldWrap {} /* 필드 영역 */
+.inputArea:after, .selectArea:after, .fileArea:after, .labelArea:after, .radioArea:after, .checkArea:after, .addressArea:after, .calendarArea:after {display:table;line-height: 0;content: "";clear: both;}
+.inputArea {} /* 입력폼 요소를 포함하는 영역 */
+.inputArea  a, .inputArea button {;}
+.inputArea p {}
+.inputArea p:first-child {}
+.inputArea .dashed {}
+
+/* 날짜 입력폼 */
+.calendarWrap {}
+
+
+
+/*****************************************************************************************************************************************
+	common 타이틀 및 텍스트 스타일
+*****************************************************************************************************************************************/
+
+/* 공통 컨텐츠 타이틀 */
+.contTit {color:#1a4779;font-size:2.5rem;}
+.subTit {color:#1a4779;font-size:1.8rem;}
+.smallTit {color:#222;font-size:1.7rem;}
+.blueTit {color:#2a6eb6;font-size:1.6rem;}
+
+/* 공통 텍스트 스타일 */
+.boldTxt {font-weight:700;}
+.pointColor {color:#2a6eb6;} /* 기본 포인트 색상 */
+.pointSubColor {color:#222;} /* 기본 포인트 서브색상 */
+
+/* 공통 컨텐츠 내 공통 타이틀 */
+.editerTit {} /* 에디터 타이틀 */
+.viewTit {} /* 보기 타이틀 */
+.termsTit {} /* 약관 타이틀 */
+.termsSubTit {} /* 약관 서브타이틀 */
+
+/* 팝업 타이틀 */
+
+/* 필수항목 */
+.essential {}
+
+/* 타이틀 영역 설정 */
+.contTitWrap {}
+.subTitWrap {}
+.smallTitWrap {}
+
+/* 링크영역이 없는 컨텐츠에 탭 보낼 A 설정 : 접근성 설정 */
+.tabOrder {display:block;width:1px;height:1px;text-indent:-999999px;}
+.videoTabOrder {display:block;width:1px;height:1px;text-indent:-999999px;}
+
+/*****************************************************************************************************************************************
+	common 디비젼 스타일
+*****************************************************************************************************************************************/
+/* 이미지 스타일 */
+.imgWrap {}
+	.imgWrap img {width:100%;}
+	.imgWrap .moImg {} /* 모바일 */
+	.imgWrap .pcImg {display:none;} /* pc */
+
+/* iframe */
+.iframeArea {overflow:hidden;overflow-x:auto;max-width:100%;}
+.iframeArea iframe {width:790px;height:970px;border:0;}
+
+/* 팝업내 이미지 영역 */
+.popImgWrap {}
+	.popImgSt {}
+
+/* 에디터 영역 내 태그 스타일 수정 */
+#ckContent {padding:20px;word-break:break-all;}
+
+/*****************************************************************************************************************************************
+	btn, icon
+*****************************************************************************************************************************************/
+.btnWrap:before, .btnWrap:after { content: ""; display: table; }
+.btnWrap:after { clear: both; }
+.btnWrap { *zoom: 1;font-size:0;position:relative;}
+.btnWrap .btn {margin-right:10px;box-sizing:border-box;display:inline-block;height:33px;line-height:33px;padding:0 10px;font-size:12px;color:#000;border:1px solid #000;}
+.btnWrap .btn:last-child {margin-right:0}
+.btnWrap .btn.add:after{content:'';display:inline-block;width:14px;height:100%;margin-left:10px;background:url(../images/check2.png) center no-repeat;vertical-align:top}
+.btnWrap .btn.print:before{content:'';display:inline-block;width:14px;height:100%;margin-right: 10px;background:url(../images/check2.png) center no-repeat;vertical-align:top;}
+.btnWrap .btnC {text-align:center;}
+.btnWrap .btnR {text-align:right;}
+.btnWrap .btnL {text-align:left;}
+.btnC+.btnR,
+.btnL+.btnR{position:absolute;right:40px;top:0;}
+.btnL {position:absolute;left:40px;top:0;}
+
+a[class*="btn"] {vertical-align:middle;}
+/* 페이지 내 기본 버튼 */
+.btnDefault, a.btnDefault {display:inline-block;background-color:#105d99;padding:10px 30px;color:#ffffff;font-size:1.5rem;border:none;border-radius:3px;}
+.btnDefault:hover {}
+/* 페이지 내 기본 서브버튼 */
+.btnSub, a.btnSub {display:inline-block;background-color:#fff;border:1px solid #105d99;padding:9px 29px;color:#105d99;font-size:1.5rem;border-radius:3px;}
+.btnSub:hover {}
+/* 페이지 내 비주얼 버튼 */
+.btnVisual, a.btnVisual {display:inline-block;background-color:transparent;border:1px solid #fff;padding:9px 14px;color:#fff;font-size:1.5rem;border-radius:3px;}
+.btnVisual:hover {}
+/* 전송버튼 */
+.btnDefaultForm, a.btnDefaultForm {display:inline-block;padding:10px 15px;background-color:#105d99;font-size:1.5rem;color:#fff;border:none;border-radius:3px;margin-top: 5px;}
+.btnDefaultForm:hover {}
+/* 전송버튼 서브 */
+.btnSubForm, a.btnSubForm {display:inline-block;padding:9px 14px;border:1px solid #105d99;background-color:#fff;font-size:1.5rem;color:#105d99;border-radius:3px;}
+.btnSubForm:hover {}
+/* 테이블 내 공통 버튼 */
+.btnInputForm, a.btnInputForm {display:inline-block;padding:9px 14px;border:1px solid #d0d0d0;background-color:#fff;font-size:1.5rem;color:#777;border-radius:3px;}
+.btnInputForm:hover {}
+/* 테이블 내 서브 버튼 */
+.btnInputSubForm, a.btnInputSubForm {padding:6px 10px;color:#444444;border:1px solid #cccccc;}
+.btnInputSubForm:hover {}
+/* 조회영역 내 기본버튼 */
+.btnInquiry {background-color:#2a6eb6;padding:10px 15px;color:#ffffff;font-size:1.5rem;border:none;border-radius:3px;}
+/* 조회영역 내 서브 버튼 */
+.btnInquirySub {}
+	.btnInquirySub span {display:inline-block;padding:9px 15px;font-size:1.5rem;border:1px solid #d0d0d0;border-radius:3px;}
+	.btnInquirySub .on {background-color:#9aa3ac;padding:10px 15px;color:#ffffff;border:none;}
+/* 기본검색 내 버튼 */
+.btnSearch, a.btnSearch {display:inline-block;padding:9px 15px;background-color:#205e9f;font-size:1.6rem;color:#fff;border:none;border-radius:3px;}
+.btnSearch:hover {}
+/* 작은 라운드 버튼 */
+.btnSamll, a.btnSmall {display:inline-block;padding:6px 19px;border:1px solid #d0d0d0;background-color:#fff;font-size:1.2rem;color:#777;border-radius:20px}
+/* 다운로드 버튼 */
+.btnDownload, a.btnDownload {display:inline-block;background-color:#fff;padding:6px 13px;font-size:1.2rem;border:1px solid #d0d0d0;border-radius:3px;}
+	.btnDownload [class^="icon"] {display:inline-block;margin-right:12px;width:14px;height:14px;vertical-align:middle;}
+/* 바로가기 버튼 */
+.btnShortLink, a.btnShortLink {display:inline-block;background-color:#9aa3ac;padding:7px 20px;color:#ffffff;font-size:1.2rem;border:none;border-radius:3px;}
+	.btnShortLink [class^="icon"] {display:inline-block;margin-right:12px;width:14px;height:14px;vertical-align:middle;}
+/* 새로고침 버튼 */
+.btnRefresh, a.btnRefresh {display:inline-block;background-color:#9aa3ac;padding:10px 20px 9px;color:#ffffff;font-size:1.4rem;border:none;border-radius:3px;}
+	.btnRefresh [class^="icon"] {display:inline-block;margin-right:10px;width:16px;height:18px;vertical-align:middle;}
+/* 이메일 버튼 */
+.btnMail, a.btnMail {display:inline-block;width:37px;height:37px;background:url('/images/front/btn/btn_mail_mo.png') no-repeat 0 0;background-size:37px auto;}
+.btnMail:hover {background-position:0 bottom;}
+	.btnMail span {display:inline-block;text-indent:-999em;overflow:hidden;}
+/* 페이스북 버튼 */
+.btnFb, a.btnFb {display:inline-block;width:37px;height:37px;background:url('/images/front/btn/btn_facebook_mo.png') no-repeat 0 0;background-size:37px auto;}
+.btnFb:hover {background-position:0 bottom;}
+	.btnFb span {display:inline-block;text-indent:-999em;overflow:hidden;}
+/* 인쇄 버튼 */
+.btnPrint, a.btnPrint {display:inline-block;width:37px;height:37px;background:url('/images/front/btn/btn_print_mo.png') no-repeat 0 0;background-size:37px auto;}
+.btnPrint:hover {background-position:0 bottom;}
+	.btnPrint span {display:inline-block;text-indent:-999em;overflow:hidden;}
+/* 버튼 + 화살표 아이콘 */
+.iconGoArrow {display:inline-block;margin-left:18px;width:14px;height:14px;vertical-align:middle;}
+/* 팝업 닫기 버튼 */
+.btnPopClos {}
+/* TOP 버튼 */
+.btnTopArea {position:relative;}
+	.btnTopArea [class*="btn"] {right:50%;margin-right:-600px;background:url('/images/kor/common/btn_top.png') no-repeat center center;width:40px;height:40px;text-indent:-9999px;z-index:9;}
+	.btnFix {position:fixed;bottom:20px;}
+	.btnAbs {position:absolute;bottom:237px;}
+
+/* 기본 버튼 영역 */
+.btnArea {position:relative;}
+	.btnArea a, .btnArea button {margin-right:6px;}
+/* 그리드 버튼 영역 */
+.btnGridArea {}
+/* 조회 영역의 버튼 */
+.btnInquiryArea {text-align:center;}
+/* 폼 버튼 영역 */
+.btnFormArea {position:relative;text-align:center;}
+	.btnFormArea a, .btnFormArea button {}
+/* 레이어 팝업 내 버튼 영역 */
+.btnLayerPopArea {}
+/* 윈도우 팝업 내 기본 버튼 영역 */
+.popBtnArea {text-align:center;}
+/* 윈도우 팝업 내 폼 버튼 영역 */
+.popBtnFormArea {text-align:center;}
+	.popBtnFormArea a, .popBtnFormArea button {margin-left:6px;}
+/* 윈도우 팝업 내 조회 영역의 버튼 */
+.popBtnInquiryArea {text-align:center;}
+/* 로그인 영역의 버튼영역 */
+.btnLoginArea {}
+/* 하단의 서비스 버튼 영역 */
+.btnServiceArea {height:37px;margin-top:30px;padding:10px 0;background-color:#f0f0f0;text-align:center;}
+	.btnServiceArea a, .btnServiceArea button {margin-left:10px;}
+	.btnServiceArea a:first-child, .btnServiceArea button:first-child {margin-left:0;}
+
+/* 다운로드 아이콘 */
+.iconDownLoad {background:url("/images/front/icon/ico_downLoad.png") no-repeat center top;background-size:100%;}
+/* 바로가기 아이콘 */
+.iconShortLink {background:url("/images/front/icon/ico_shortLink.png") no-repeat center top;background-size:100%;}
+/* 어도비 리더 아이콘 */
+.iconFile {background:url("/images/front/icon/ico_file.png") no-repeat center top;background-size:100%;}
+/* 화살표 아이콘 */
+.iconGoArrow {background:url("/images/front/icon/ico_goarrow.png") no-repeat right top;background-size:100%;}
+/* 새로고침 아이콘 */
+.iconRefresh {background:url("/images/front/icon/ico_refresh.png") no-repeat center top;}
+
+/*****************************************************************************************************************************************
+	search
+*****************************************************************************************************************************************/
+/* 조회영역 */
+.InquiryWrap {}
+	.InquiryWrap ul {overflow:hidden;}
+	.InquiryWrap li + li {margin-top:23px;}
+	.InquiryWrap .tit {padding-bottom:9px;color:#222222;font-size:1.6rem;}
+	.InquiryWrap .inputArea .inputText {width:76%;}
+	.InquiryWrap .inputArea .btnInquiry {margin-left:1%;width:23%;}
+
+/*****************************************************************************************************************************************
+	paging style
+*****************************************************************************************************************************************/
+/* pageArea */
+.pageArea{margin:0 auto;padding-top:40px;text-align:center;font-size:0;}
+.pageArea a, .pageArea strong{display:inline-block;margin:0 14px;font-size:14px;color:#666;vertical-align:middle;text-decoration:none;}
+.pageArea strong{border-bottom:1px solid #f88119;color:#f88119;}
+.pageArea a[class*="btn"]{margin:0 8px;}
+.pageArea a[class*="btn"] span{font-size:0;position:absolute;top:-9999px;}
+.pageArea .btnFirst{background:#fff url('../images/btn_page_first.png') no-repeat 50% 50%;margin-left:0 !important;background-size:8px auto;width:8px;height:9px;}
+.pageArea .btnPrev{background:#fff url('../images/btn_page_prev.png') no-repeat 50% 50%;margin-right:12px !important;background-size:5px auto;width:5px;height:9px;}
+.pageArea .btnNext{background:#fff url('../images/btn_page_next.png') no-repeat 50% 50%;margin-left:12px;background-size:5px auto;width:5px;height:9px;}
+.pageArea .btnLast{background:#fff url('../images/btn_page_last.png') no-repeat 50% 50%;background-size:8px auto;width:8px;height:9px;margin-right:0 !important;}
+
+/*****************************************************************************************************************************************
+	table
+	[테이블 구조안내]
+	 - 리스트 테이블 : .tableBasicList > .defaultTable >th + td
+	 - 보기, 등록 테이블 : .tableBasicView > .defaultTable > th + td
+	 - 그래프 및 데이터 테이블 : .tableSubView > .defaultTable > th + td
+	 - 달력 리스트 테이블 : .tableCalendarBasic > .defaultTable > th + td
+*****************************************************************************************************************************************/
+/* 최소단위 테이블 설정 */
+.defaultTable {width:100%;}
+.defaultTable th, .defaultTable td {vertical-align:middle;word-wrap:break-word;}
+.defaultTable .ellipsis {text-align:left;}
+
+/* 기본 리스트 타입 */
+.tableBasicList {border-top:2px solid #434343;border-bottom:2px solid #ccc;}
+.tableBasicList th {background-color:#fafafa;color:#222;}
+.tableBasicList th, .tableBasicList td {padding:11px 10px;border-top:1px solid #d9d9d9;border-left:1px solid #d9d9d9;text-align:center;}
+.tableBasicList tr th:first-child, .tableBasicList tr td:first-child {border-left:0;}
+.tableBasicList thead th {padding:12px 10px;border-top:0;font-weight:700;color:#222;}
+.tableBasicList th {font-weight:400;}
+.tableBasicList td {background-color:#fff;}
+.tableBasicList tr [rowspan] {border-right:1px solid #d9d9d9;}
+.tableBasicList tr td:last-child[rowspan] {border-right:none;}
+
+/* 보기, 등록 페이지 */
+.tableBasicView {border-top:1px solid #434343;border-bottom:1px solid #ccc;}
+.tableBasicView th {height:39px;padding:0 10px;border-top:1px solid #d9d9d9;border-right:1px solid #d9d9d9;color:#333;}
+.tableBasicView td {padding:8px 15px;border-top:1px solid #d9d9d9;}
+.tableBasicView tr:first-child th, .tableBasicView tr:first-child td {border-top:0;}
+.tableBasicView .defaultList {overflow:hidden;}
+.tableBasicView .defaultList li {float:left;margin-right:10px;}
+.tableBasicView .defaultList li:last-child {margin-right:0;}
+
+/* 그래프 및 데이터 테이블 페이지 */
+.tableDataView {border-top:1px solid #d9d9d9;}
+.tableDataView th, .tableDataView td {padding:14px 0;border-bottom:1px solid #d9d9d9;}
+.tableDataView th {font-weight:400;text-align:left;}
+.tableDataView td {text-align:right;}
+
+/* 달력 리스트 테이블 */
+.tableCalendarBasic {}
+.tableCalendarBasic th {}
+.tableCalendarBasic td {}
+
+/* 전체 감싸는 영역 */
+.articleBox {}
+
+/*****************************************************************************************************************************************
+	Ul style
+	[탭 스타일 구조안내]
+		- 기본 도트 리스트 : .defaultDotList > li
+		- 기본탭 : .defaultTab > .select + ul > li
+		- 셀렉트탭 : .selectTab > .select + ul > li
+		- 게시물 리스트 (목록) : .boardList > .defaultList > li
+		- 게시물 리스트 (보기) : .boardView > .boardTit + .boardCon
+		- 게시물 리스트 (쓰기) :
+		- 게시물 리스트 (썸네일) : .thumbnailList > ul > li
+		- 게시물 리스트 (아코디언) : .accordionList > ul > li
+*****************************************************************************************************************************************/
+/* defaultTab */
+.defaultTab {position:relative;margin-bottom:20px;}
+	.defaultTab ul {display:none;position:absolute;left:0;top:36px;z-index:5;width:100%;padding:3px 0;border-right:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9;border-left:1px solid #d9d9d9;border-radius:0 0 3px 3px;background-color:#fafafa;}
+	.defaultTab.active ul {display:block;}
+	.defaultTab li {}
+	.defaultTab a, .defaultTab button {display:block;font-size:1.5rem;line-height:1.5;word-wrap:break-word;}
+	.defaultTab a {padding:8px 16px;}
+	.defaultTab li.active a, .defaultTab li a:hover {color:#2a6eb6;}
+	.defaultTab .select button {display:block;width:100%;padding:7px 51px 6px 16px;border:1px solid #d9d9d9;border-radius:3px;background:url('/images/front/icon/ico_tabarrow_off.png') no-repeat 100% 50%;background-size:35px 11px;color:#555;text-align:left;}
+	.defaultTab.active .select button {border-radius:3px 3px 0 0;background-image:url('/images/front/icon/ico_tabarrow_on.png');}
+
+/* defaultTabCon - 상세 내용 */
+.defaultTabCon {position:relative;}
+	.defaultTabCon > article {display:none;}
+	/* .defaultTabCon > article:first-child {display:block;} */
+
+/* selectTab */
+.selectTab {position:relative;margin-bottom:20px;}
+	.selectTab ul {display:none;position:absolute;top:36px;left:0;z-index:5;width:100%;padding:3px 0;border-right:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9;border-left:1px solid #d9d9d9;border-radius:0 0 3px 3px;background-color:#fafafa;}
+	.selectTab.active ul {display:block;}
+	.selectTab li {}
+	.selectTab a, .selectTab button {display:block;font-size:1.5rem;line-height:1.5;word-wrap:break-word;}
+	.selectTab a {padding:8px 16px;}
+	.selectTab li.active a, .selectTab li a:hover {color:#2a6eb6;}
+	.selectTab .select button {display:block;overflow:hidden;width:100%;padding:7px 51px 6px 16px;border:1px solid #d9d9d9;border-radius:3px;background:url('/images/front/icon/ico_tabarrow_off.png') no-repeat 100% 50%;background-size:35px 11px;
+	color:#555;text-align:left;text-overflow:ellipsis;white-space:nowrap;}
+	.selectTab.active .select button {border-radius:3px 3px 0 0;background-image:url('/images/front/icon/ico_tabarrow_on.png');}
+
+/* selectTabCon - 상세 내용 */
+.selectTabCon {position:relative;}
+	.selectTabCon > article {display:none;}
+	/* .selectTabCon > article:first-child {display:block;} */
+
+
+/* .defaultDotList */
+.defaultDotList {}
+	.defaultDotList > li {background:url('/images/front/icon/ico_basicDot.png') no-repeat left 4px;padding-left:10px;}
+
+/* .defaultBlueDotList */
+.defaultBlueDotList {}
+	.defaultBlueDotList > li {background:url('/images/front/icon/ico_blueDot.png') no-repeat 0 9px;padding-left:10px;}
+
+/* .defaultGrayDotList */
+.defaultGrayDotList {}
+	.defaultGrayDotList > li {background:url('/images/front/icon/ico_grayDot.png') no-repeat 0 4px;background-size: 3px;padding-left:10px;}
+
+/* .smallBlueDotList */
+.smallBlueDotList {}
+	.smallBlueDotList > li {background:url('/images/front/icon/ico_smallBlueDot.png') no-repeat left 5px;padding-left:10px;}
+
+/* .smallGrayDotList */
+.smallGrayDotList {}
+	.smallGrayDotList > li {background:url('/images/front/icon/ico_smallgrayDot.png') no-repeat 0 4px;padding-left:10px;}
+
+/* defaultArrowList */
+.defaultArrowList {}
+	.defaultArrowList > li {background:url('/images/front/icon/ico_arrowDot.png') no-repeat left 5px;padding-left:10px;}
+
+/* dsahList */
+.dashList {}
+	.dashList > li {position:relative;margin-top:3px;padding-left:11px;line-height:1.4;}
+	.dashList > li:before {content:"-";display:block;clear:both;position:absolute;top:1px;left:0;}
+	.dashList > li:first-child {margin-top:0;}
+
+/* 게시물 리스트형 - 목록 */
+.boardList {margin-top:30px;border-top:2px solid #2a6eb6;}
+	.boardList li {padding:13px 15px;font-size:1.4rem;border-bottom:1px solid #d9d9d9;}
+	.boardList .ellipsis {margin-bottom:5px;}
+	.boardList .date {color:#aaaaaa;font-size:1.2rem;}
+
+/* 게시물 리스트형 - 보기 */
+.boardView {}
+.boardView .boardTit {position:relative;padding-bottom:8px;border-bottom:1px solid #d9d9d9;}
+.boardView .boardTit h3 {color:#1a4779;font-size:1.8rem;line-height:1.2;word-break:break-all;}
+.boardView .boardTit .txt {margin-top:2px;font-size:1.2rem;}
+.boardView .boardTit .txt span {display:inline-block;color:#aaa;line-height:1;}
+.boardView .boardTit .txt span.hits {margin-left:7px;padding-left:9px;border-left:1px solid #aaa;}
+.boardView #ckContent {padding:20px 0; font-size:1.4rem;border-bottom:1px solid #d9d9d9;}
+
+/* 게시물 리스트형 - 쓰기 */
+
+
+/* 게시물이 없을 때 */
+.listNone {}
+	.listNone p {}
+
+/* 썸네일형 게시판 리스트 - thumbnailList */
+.thumbnailList li {padding:20px 0 18px;border-bottom:1px solid #d9d9d9;}
+.thumbnailList .img {display:block;width:220px;margin:0 auto;}
+.thumbnailList .img img {display:block;width:100%;}
+.thumbnailList .cont {padding-top:20px;}
+.thumbnailList .ellipsis {font-size:1.7rem;}
+.thumbnailList .ellipsis a {color:#222;line-height:1;}
+.thumbnailList .text {padding:15px 0 30px;font-size:1.4rem;line-height:1.6;}
+.thumbnailList .text a {display:block;max-height:66px;word-break:break-all;overflow:hidden;}
+.thumbnailList .text a p{display:inline;}
+.thumbnailList .date {color:#aaa;font-size:1.2rem;}
+
+/* 아코디언 리스트 - accordion List */
+.accordionList{width:100%;border-top:2px solid #2a6eb6;}
+.accordionList li .accoTit {display:block;padding:13px 43px 13px 15px;border-bottom:1px solid #d9d9d9;background:url('/images/front/common/bg_slide_open_mo.png') no-repeat right 50%;background-size:31px auto;}
+.accordionList li .accoTit .tit {display:block;color:#222;font-size:1.6rem;line-height:1.3;}
+.accordionList li .accoCon {display:none;position:relative;padding:15px;border-bottom:1px solid #d9d9d9;background:#fafafa;font-size:1.4rem;line-height:1.6;}
+.accordionList li .accoCon .tableBasicList thead th {background-color:#f0f0f0;}
+.accordionList li.active .accoTit {background-image:url('/images/front/common/bg_slide_close_mo.png')}
+.accordionList li.active .accoTit .tit {color:#2a6eb6;}
+.accordionList li.active .accoCon {display:block;word-wrap:break-word;}
+
+
+
+/*****************************************************************************************************************************************
+	common Layout - 공통적용되는 스타일은 작업하시면 안됩니다.
+
+	폰트사이즈 정의 - rem : 최상위 폰트정의 값에 상속 (사파리5+, 크롬, 파이어폭스 3.6+, 익스플로러9+) / em, % : 설정한 부모 폰트 사이즈에 상속
+	8px == 0.8rem, 0.8em, 80%
+	9px == 0.9rem, 0.9em, 90%
+	10px == 1rem, 1em, 100% : 기본 사이즈 설정 값
+	11px == 1.1rem, 1.1em, 110%
+	12px == 1.2rem, 1.2em, 120%
+	13px == 1.3rem, 1.3em, 130%
+	14px == 1.4rem, 1.4em, 140%
+	15px == 1.5rem, 1.5em, 150%
+	16px == 1.6rem, 1.6em, 160%
+	17px == 1.7rem, 1.7em, 170%
+	18px == 1.8rem, 1.8em, 180%
+
+	기본 레이아웃 초기값 설정
+	.wrap > .header + .contentsWrap + .footer
+*****************************************************************************************************************************************/
+.wrap {position:relative;overflow:hidden;}
+/*******************************************************************************************
+	최상단 영역 초기값 설정
+	.header > .container > header > .logo + .topMenuWrap + .btnMenuView + .megaMenu + .utility + .searchWrap
+********************************************************************************************/
+.header {position:relative;}
+
+/*******************************************************************************************
+	메뉴영역 초기값 설정
+	.megaMenu > .container + .dim
+	: container = section > h2 + .btnMenuClose + .menuWrap
+	: .menuWrap = nan > ul > li > .depthWrap
+********************************************************************************************/
+.megaMenu {display:none;}
+.megaMenu.active {display:block;}
+	.megaMenu > .container {position:fixed;top:0;right:0;width:100%;height:100%;z-index:1000;box-sizing:border-box;}
+	.megaMenu section {height:100%;margin-left:32px;background-color:#f0f0f0;}
+	.megaMenu h2 {padding:15px 10px 16px;background:url('/images/front/common/bg_megatit_mo.png') repeat-x 0 0;background-size:328px auto;font-size:1.6rem;color:#fff;}
+	.megaMenu a {display:block;font-size:1.4rem;line-height:1.4;word-wrap:break-word;}
+	.megaMenu .btnMenuClose {display:block;position:absolute;right:8px;top:10px;z-index:1005;width:30px;height:30px;background:url('/images/front/btn/btn_menuclose_mo.png') no-repeat 50% 50%;background-size:16px;}
+	.megaMenu .btnMenuClose span {font-size:0;position:absolute;top:-9999px;}
+	.megaMenu .dim {position:fixed; top:0;left:0;z-index:999;width:100%; height:100%;background-color:#000;opacity:0.5;filter: Alpha(opacity=50);}
+
+.menuWrap {position:relative;height:100%;background-color:#f0f0f0;}
+	.menuWrap nav {height:100%;}
+	.menuWrap ul:after {content:"";display:block;clear:both;height:0;visibility:hidden;}
+	.menuWrap ul li > a {padding:16px 9px 14px;border-bottom:1px solid #d9d9d9;}
+	.menuWrap .depth01, .menuWrap .depth01 > li.active {height:100%;}
+	.menuWrap .depth01 > li > a {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;position:absolute;left:0;width:100px;box-sizing:border-box;}
+	.menuWrap .depth01 > li.active > a, .menuWrap .depth01 > li > a:hover {border-bottom:none;background-color:#fff;color:#222;}
+	.menuWrap .depth01 > li:last-child > a {top:50px;}
+	.menuWrap .depthWrap {display:none;overflow-x:hidden;overflow-y:auto;margin-left:100px;height:100%;background-color:#fff;}
+	.menuWrap .active .depthWrap {display:block;}
+		.depthWrap .depthArea {}
+		.depthWrap .depth02 {border-left:1px solid #fff;background-color:#fff;}
+		.depthWrap .depth02 > li {margin:0 10px 0 9px;}
+		.depthWrap .depth02 > li > a {color:#222;}
+		.depthWrap .depth02 > li.active > a, .depthWrap .depth02 > li > a:hover {position:relative;font-weight:700;color:#2a6eb6;}
+		.depthWrap .depth02 > li.active > a:after, .depthWrap .depth02 > li > a:hover:after {content:"";display:block;overflow:hidden;clear:both;position:absolute;right:5px;top:50%;width:8px;height:12px;margin-top:-7px;background:url('/images/front/icon/ico_megaarrow_mo.png') no-repeat 0 50%;background-size:cover;}
+		.depthWrap .depth03 {display:none;}
+		.depthWrap .bannerArea {display:none;}
+		.depthWrap .overviewArea {display:none;}
+	.menuWrap .btnGnbClose {display:none;}
+
+
+/*******************************************************************************************
+	컨텐츠영역 초기값 설정
+	#contentsWrap > container > .conTitWrap + .moLnbWrap + .pcLnbWrap + .contents
+********************************************************************************************/
+#contentsWrap {position:relative;background-image:url('/images/front/common/bg_contit_mo.png');background-repeat: repeat-x;background-position:0 0;background-size:auto 60px;}
+	#contentsWrap > .container {}
+
+/* 페이지 타이틀 영역 */
+.conTitWrap h2 {display:table-cell;height:60px;padding:0 15px;font-weight:700;font-size:1.8rem;line-height:1;color:#fff;vertical-align:middle;}
+.conTitWrap .location {display:none;}
+
+/* 모바일 LNB */
+.moLnbWrap {}
+	.moLnbWrap div {position:relative;z-index:100;}
+
+
+/* PC LNB */
+.pcLnbWrap {display:none;}
+
+.contents {min-height:260px;padding:30px 15px 0;font-size:1.4rem;}
+
+/*******************************************************************************************
+	하단영역 초기값 설정
+	.footer > container > .footMenuWrap + .copy + .familyWrap
+********************************************************************************************/
+.footer {position:relative;margin-top:50px;padding-bottom:30px;border-top:1px solid #e6e6e6;}
+	.footer > .container {padding:0 15px;}
+
+	.footer .footMenuWrap {margin:11px 0 24px;}
+	.footer .footMenuWrap:after {content:"";display:block;clear:both;height:0;visibility:hidden;}
+		.footer .footMenuWrap li {display:none;float:left;position:relative;width:50%;text-align:center;}
+		.footer .footMenuWrap li:after {content:"";display:block;clear:both;position:absolute;left:0;top:50%;width:1px;height:10px;margin-top:-5px;background:#d9d9d9;}
+		.footer .footMenuWrap li.sitemap, .footer .footMenuWrap li.contact {display:block;}
+		.footer .footMenuWrap li.contact:after {display:none;}
+		.footer .footMenuWrap li > a {display:inline-block;padding:3px 0;font-size:1.3rem;}
+
+	.footer .copy {padding:0 55px;font-size:1.2rem;text-align:center;}
+
+	.footer .familyWrap {display:none;}
+
+/*****************************************************************************************************************************************
+	팝업 설정 - 윈도우 팝업만 적용
+*****************************************************************************************************************************************/
+/* 공통 일반팝업 레이아웃 */
+.popWrap {}
+.popWrap .popHeader {}
+.popWrap .popContWrap {}
+.popWrap .imgBox img {width:100%;}
+.popWrap .popBtn {}
+.popWrap .popBtn button {}
+
+/* 달력 */
+.calendarPop {display:none;position:absolute;left:50%;z-index:100;width:400px;margin-left:-20px;background-color:#fff;box-shadow: 0px 1px 20px #333;z-index:1000;}
+.calendarPop .popTit {padding:24px 0;background-color:#78bc00;color:#fff;font-size:20px;font-weight:700;text-align:center;}
+.calendarPop .popCon {padding:20px 20px 30px;}
+.calendarPop .popCon .btnArea {margin-top:20px;}
+.calendarPop .btnClose {display:inline-block;position:absolute;right:26px;top:20px;width:20px;height:20px;padding:0;background:0;border:0;cursor:pointer;}
+.calendarPop .btnClose img {vertical-align:middle;}
+.calendarPop .popCon .box {text-align:center;}
+.calendarPop .btnArea {text-align:center;}
+
+.calendarHeader {position:relative;padding-bottom:10px;}
+.calendarHeader select {width:98px;height:32px;margin-left:6px;padding:6px 10px;border:1px solid #dbdbdb;color:#333;font-size:13px;line-height:30px}
+.calendarHeader .btnCal {position:absolute;top:6px;display:block;width:12px;height:20px;background:url(/images/admin/btn_calendar.png) no-repeat 0 0;}
+.calendarHeader .btnCal.prev {left:0;}
+.calendarHeader .btnCal.next {right:0;background-position:-12px 0;}
+.calendarHeader .btnCal .txt {position:absolute;left:0;top:0;text-indent:-999em;}
+.calendarTbl {padding-top:20px;border-top:1px solid #d6d6d6;}
+.calendarTbl .tit{display:block;font-size:15px;font-weight:700;line-height:1;color:#333;}
+.calendarTbl table{width:100%;margin-top:9px;}
+.calendarTbl th, .calendarTbl td a{padding:9px 0;font-size:13px;font-weight:normal;color:#333;}
+.calendarTbl td a{display:block;width:100%;height:100%;}
+.calendarPop .btn {display:inline-block;min-width:80px;height:32px;padding:8px 10px 11px;color:#fff;font-size:13px;font-weight:700;text-align:center;}
+.calendarPop .btn.typeGreen {background-color:#78bc00;}
+.calendarPop .btn.typeGray {background-color:#a0a0a0;}
+
+/*****************************************************************************************************************************************
+	컨텐츠 페이지 내 공통처리
+*****************************************************************************************************************************************/
+
+/* 상단 안내영역 */
+.contInfoArea {margin-bottom:30px;}
+.contInfoArea img {width:100%;}
+.contInfoArea .contTit {margin-top:22px;margin-bottom:18px;}
+.contInfoArea .contTit span {display:block;}
+.contInfoArea .contTit:after {display:block;content: "";background-color:#1a4779;margin-top:17px;width:54px;height:5px;}
+.contInfoArea .img {margin:0 auto;width:70%;}
+.contInfoArea .txt {margin-bottom:26px;font-size:1.4rem;line-height:1.4em;}
+.contInfoArea .year {font-size:3.0rem;font-weight:700;}
+.contInfoArea .month {color:#ffffff;font-size:8.0rem;}
+.contInfoArea .infoTxt {background-color:#105d99;width:100%;color:#aac5e2;font-size:1.5rem;}
+.contInfoArea .infoTxt .tit {color:#ffffff;font-size:4.5rem;}
+.contInfoArea .infoTxt .box {margin:0 auto;}
+
+/* 테이블 하단 텍스트 영역 */
+.txtTableInfoBot {margin-top:20px;color:#aaaaaa;font-size:1.2rem;}
+.txtTableInfoBot .iconFile {display:inline-block;margin-right:7px;width:10px;height:13px;vertical-align:top;}
+
+
+/*****************************************************************************************************************************************
+	컨텐츠 별 정의
+*****************************************************************************************************************************************/
+
+/* Footer - SITEMAP */
+#CT-PCK-078.contents {padding-bottom:50px;margin-bottom:-50px;background-color:#fafafa;}
+
+/* 오류페이지 */
+.errorWrap {padding:0 10px;}
+.errorWrap .errorHead {padding:16px 0;border-bottom:2px solid #2a6eb6;}
+
+
+/*****************************************************************************************************************************************
+	핵 정의
+*****************************************************************************************************************************************/
+/* 파폭 핵 */
+@-moz-document url-prefix(){
+
+}
+
+/* 크롬1+, 사파리3 핵 */
+@media screen and (-webkit-min-device-pixel-ratio:0){
+
+}
+
+/*****************************************************************************************************************************************
+	반응형 처리 (태블릿, PC만 작업)
+*****************************************************************************************************************************************/
+/* 테블릿 + PC */
+@media screen and (min-width:768px) {
+/* 테블릿 + PC에서 사용하지 않는 컨텐츠 설정 */
+	.header .btnMenuView {display:none;}
+	.megaMenu h2 {display:none;}
+	.megaMenu .btnMenuClose {display:none;}
+	.megaMenu .dim {display:none;}
+
+/* 테블릿 + PC에서 사용되는 컨텐츠 설정 */
+
+/* [공통] 폼 요소*/
+	.inputText, .selectText, .textArea {height:42px;padding:0 20px;}
+
+	/* 날짜 입력폼 */
+	.calendarWrap .btnFormArea, .calendarWrap .calendarArea {vertical-align:top;}
+}
+
+
+/* PC 버전 */
+@media screen and (min-width:1025px) {
+/* PC에서 사용하지 않는 컨텐츠 설정 */
+	.moLnbWrap {display:none;}
+
+/* PC에서 사용되는 컨텐츠 설정 */
+
+
+/* [공통] 폼 요소*/
+	.inputText, .selectText, .textArea {font-size:16px;}
+
+	/* 날짜 입력폼 */
+	.calendarWrap .btnFormArea, .calendarWrap .calendarArea {display:inline-block;}
+
+/* [공통] 타이틀 및 텍스트 요소*/
+	/* 공통 컨텐츠 타이틀 */
+	.contTit {font-size:42px;}
+	.subTit {font-size:30px}
+	.smallTit {font-size:22px;}
+	.blueTit {font-size:18px;}
+
+	/* 공통 텍스트 스타일 */
+
+
+/* [공통] 디비젼 스타일 */
+	.imgWrap {}
+		.imgWrap .moImg {display:none;}
+		.imgWrap .pcImg {display:block;}
+
+/* [공통] btn, icon */
+	/* 페이지 내 기본 버튼 */
+	.btnDefault, a.btnDefault {font-size:16px;}
+
+/* [공통] search */
+	/* 조회영역 */
+	.InquiryWrap .tit {font-size:16px;}
+
+/* [공통] paging style */
+	/* pageArea */
+	.pageArea a, .pageArea strong {width:33px;height:33px;font-size:1.6rem;line-height:35px;}
+
+/* [공통] table */
+	/* 최소단위 테이블 설정 */
+	.defaultTable {}
+	.defaultTable th, .defaultTable td {}
+
+	/* 기본 리스트 타입 */
+	.tableBasicList thead th {font-size:18px;}
+
+/* [공통] Ul style */
+	/* defaultTab */
+	.defaultTab {margin-bottom:60px;}
+		.defaultTab ul {position:static;padding:0;border:none;background-color:transparent;}
+
+	/* sectectTab */
+	.selectTab {margin-bottom:20px;}
+		.selectTab ul {top:41px;padding:17px 0;}
+
+	/* 기본리스트 */
+	.defaultList {font-size:14px;}
+
+	/* 게시물 리스트형 - 목록 */
+	.boardList li {font-size:14px;}
+
+	/* 게시물 리스트형 - 보기 */
+	.boardView .boardTit h3 {font-size:30px;}
+
+/* 레이아웃 요소 */
+	.wrap {overflow-x:hidden;}
+
+/* 최상단 영역 */
+	.header {}
+		.header:before {content:"";display:block;clear:both;position:absolute;left:0;top:0;width:100%;height:35px;background:#033d6a;}
+
+	/* 유틸 메뉴 */
+		.utility {}
+		.utility a {font-size:13px;}
+
+	/* 검색영역 - 테블릿 + PC에서만 사용 */
+		.header .searchWrap {}
+
+/* 메뉴영역 설정 */
+	.megaMenu {margin-left:260px;margin-right:4px;}
+
+
+/* 컨텐츠 영역 설정 */
+	#contentsWrap {}
+
+	/* 페이지 타이틀 영역 */
+	.conTitWrap {height:120px;}
+
+	/* PC LNB */
+	.pcLnbWrap {display:block;float:left;width:254px;margin:68px 0 0 6px;}
+
+/* 하단영역 설정 */
+	.footer {}
+		.footer > .container {position:relative;max-width:1280px;margin:0 auto;}
+
+/* 공통 일반팝업 레이아웃 */
+.popWrap {}
+	.popWrap .popHeader {}
+	.popWrap .popContWrap {}
+	.popWrap .popHeader .popTit {}
+	.popWrap .popBtn button.close {}
+
+
+/* 컨텐츠 별 정의 */
+
+/* 컨텐츠 페이지 공통 */
+
+/* 상단 안내영역 */
+.contInfoArea {margin-bottom:82px;}
+
+/* 테이블 하단 텍스트 영역 */
+.txtTableInfoBot {font-size:14px;}
+
+/* 오류페이지 */
+.errorWrap .errorCont {font-size:16px;}
+
+}
+
+
+
