@@ -7,16 +7,9 @@ var UI = {
 
       var handler = {
           sec1: function SEC1_ANIMATE() {
-            console.log(1)
               if(sec1) return;
               sec1 = true;
               var $container = $('#sec1'), tl = new TimelineMax();
-              
-          },
-          sec2: function SEC2_ANIMATE() {
-              if(sec2) return;
-              sec2 = true;
-              var $container = $('#sec2'), tl = new TimelineMax();
 
               var workListSwiper = new Swiper('.workList', {
                 direction: 'vertical',
@@ -50,5 +43,9 @@ $( function() {
   UI.$body = $("body");
   var winHeight = window.innerHeight;	
   $(".aboutWrap").attr('style','padding-top:'+winHeight+'px');
+
+  var $container = $('.infoWrap'), tl = new TimelineMax();
+  tl.staggerTo($container.find('.txt span'), .3, {y:0, opacity:1, ease:Linear.easeIn}, .3);
+
   UI.scroll();
 })
