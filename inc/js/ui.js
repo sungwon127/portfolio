@@ -64,7 +64,7 @@ var UI = {
         var targetTop = $target.offset().top - 80;
         
         if(targetTop <= scltop){
-          $('.gnb > li').eq(idx).addClass("on").siblings().removeClass('on');;
+          $('.gnb > li').eq(idx).addClass("on").siblings().removeClass('on');
         };
 
         if(scltop == 0){
