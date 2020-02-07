@@ -48,6 +48,8 @@ var UI = {
       }
     });
 
+    var lastScrollTop = 0;
+    
     $(window).on("scroll", function(){
       if($(window).scrollTop() > 100){
         $(".header").addClass('on');
@@ -55,7 +57,21 @@ var UI = {
         $(".header").removeClass('on');
       }
 
-      
+      var scltop = $(window).scrollTop();
+      $('.contItem').each(function(idx){
+        var $target = $('.contItem').eq(idx);
+        var i = $target.index();
+        var targetTop = $target.offset().top - 80;
+        
+        if(targetTop <= scltop){
+          $('.gnb > li').eq(idx).addClass("on").siblings().removeClass('on');;
+        };
+
+        if(scltop == 0){
+          $('.gnb > li').removeClass('on');
+        }
+      });
+    
     }).trigger("scroll");
 
   }
