@@ -33,7 +33,7 @@ var UI = {
 
     var workListSwiper = new Swiper('.workList', {
       direction: 'vertical',
-      slidesPerView: 'auto',
+      slidesPerView: 10,
       spaceBetween: 20,
       freeMode:true,
       on:{
