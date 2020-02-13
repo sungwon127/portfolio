@@ -57,6 +57,13 @@ var UI = {
         $(".header").removeClass('on');
       }
 
+      if($(window).scrollTop() > window.innerHeight){
+        $('.infoWrap .txt').hide();
+      }else{
+        $('.infoWrap .txt').show();
+      }
+
+
       var scltop = $(window).scrollTop();
       $('.contItem').each(function(idx){
         var $target = $('.contItem').eq(idx);
